@@ -20,6 +20,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="PerformanceTests\**" />
+    <EmbeddedResource Remove="PerformanceTests\**" />
+    <None Remove="PerformanceTests\**" />
+    <Page Remove="PerformanceTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\sync.png" />
     <Resource Include="Assets\sync.ico" />
   </ItemGroup>
@@ -28,10 +35,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="TaskScheduler" Version="2.12.0" />
     <PackageReference Include="WPF-UI" Version="4.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PerformanceTests\" />
   </ItemGroup>
 
 </Project>
