@@ -1,0 +1,232 @@
+<ui:FluentWindow x:Class="LocalFolderBackupManager.Dialogs.ScheduleAssignmentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="Manage Backup Schedules"
+        WindowStartupLocation="CenterOwner"
+        WindowBackdropType="Mica"
+        ExtendsContentIntoTitleBar="True"
+        ResizeMode="CanResize"
+        Width="600"
+        Height="500"
+        MinWidth="500"
+        MinHeight="400"
+        Icon="/Assets/sync.ico">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title bar -->
+        <ui:TitleBar Grid.Row="0"
+                     Title="Manage Backup Schedules"
+                     ShowMaximize="True"
+                     ShowMinimize="False"
+                     Icon="/Assets/sync.ico"/>
+
+        <!-- Content -->
+        <Border Grid.Row="1" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Folder name display -->
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="Backup Rule:" 
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,5"/>
+                    <TextBlock x:Name="FolderNameText"
+                               FontSize="15"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                </StackPanel>
+
+                <!-- Create New Schedule Expander -->
+                <Expander Grid.Row="2"
+                          x:Name="CreateScheduleExpander"
+                          Header="➕ Create New Schedule"
+                          IsExpanded="False"
+                          Background="{DynamicResource ControlFillColorDefaultBrush}"
+                          Padding="15">
+                    <StackPanel Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Task Name -->
+                            <StackPanel Grid.Row="0" Grid.Column="0">
+                                <TextBlock Text="Task Name *"
+                                           FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,0,4"/>
+                                <ui:TextBox x:Name="NewTaskNameBox"
+                                            PlaceholderText="e.g. Backup_Daily"
+                                            Height="44"
+                                            Padding="12,8"
+                                            VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- Trigger Type -->
+                            <StackPanel Grid.Row="0" Grid.Column="2">
+                                <TextBlock Text="Trigger Type"
+                                           FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,0,4"/>
+                                <ComboBox x:Name="TriggerTypeCombo"
+                                          Height="44"
+                                          Padding="12,8"
+                                          VerticalContentAlignment="Center"
+                                          SelectionChanged="TriggerTypeCombo_SelectionChanged"/>
+                            </StackPanel>
+
+                            <!-- Description -->
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                                <TextBlock Text="Description (optional)"
+                                           FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,0,4"/>
+                                <ui:TextBox x:Name="DescriptionBox"
+                                            PlaceholderText="What does this schedule do?"
+                                            Height="34"/>
+                            </StackPanel>
+
+                            <!-- Time of Day (Daily / Weekly) -->
+                            <StackPanel Grid.Row="4" Grid.Column="0" x:Name="TimePicker">
+                                <TextBlock Text="Time of Day (HH:mm)"
+                                           FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,0,4"/>
+                                <ui:TextBox x:Name="TimeOfDayBox"
+                                            PlaceholderText="08:00"
+                                            Text="08:00"
+                                            Height="34"/>
+                            </StackPanel>
+
+                            <!-- Day of Week (Weekly) -->
+                            <StackPanel Grid.Row="4" Grid.Column="2" x:Name="DayPicker" Visibility="Collapsed">
+                                <TextBlock Text="Day of Week"
+                                           FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,0,4"/>
+                                <ComboBox x:Name="DayOfWeekCombo" Height="34"/>
+                            </StackPanel>
+
+                            <!-- Interval (Hourly) -->
+                            <StackPanel Grid.Row="4" Grid.Column="0" x:Name="IntervalPicker" Visibility="Collapsed">
+                                <TextBlock Text="Repeat Every (hours)"
+                                           FontSize="11" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           Margin="0,0,0,4"/>
+                                <ComboBox x:Name="IntervalCombo" Height="34"/>
+                            </StackPanel>
+
+                            <!-- Create Button -->
+                            <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
+                                <ui:Button Content="✅ Create Schedule"
+                                           Appearance="Success"
+                                           Height="36"
+                                           HorizontalAlignment="Right"
+                                           Padding="20,0"
+                                           Click="CreateNewScheduleButton_Click"/>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Available schedules with checkboxes -->
+                <Border Grid.Row="4" 
+                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                        CornerRadius="4"
+                        Padding="15">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock Text="Select schedules to assign to this backup:"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,10"/>
+
+                            <ItemsControl x:Name="SchedulesListBox">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                                                CornerRadius="4"
+                                                Padding="10"
+                                                Margin="0,0,0,8">
+                                            <CheckBox IsChecked="{Binding IsSelected}">
+                                                <CheckBox.Content>
+                                                    <StackPanel>
+                                                        <TextBlock FontWeight="SemiBold">
+                                                            <Run Text="{Binding Icon}"/>
+                                                            <Run Text="{Binding TaskName}"/>
+                                                        </TextBlock>
+                                                        <TextBlock Text="{Binding TriggerSummary}" 
+                                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                                   FontSize="12"
+                                                                   Margin="20,2,0,0"/>
+                                                    </StackPanel>
+                                                </CheckBox.Content>
+                                            </CheckBox>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- Message when no schedules found -->
+                            <TextBlock x:Name="NoSchedulesMessage"
+                                       Text="No schedules configured. Expand '➕ Create New Schedule' above to create one."
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       FontStyle="Italic"
+                                       Visibility="Collapsed"
+                                       TextWrapping="Wrap"
+                                       Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- Selection info -->
+                <TextBlock x:Name="SelectionInfoText"
+                           Grid.Row="6"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                           FontSize="12"/>
+            </Grid>
+        </Border>
+
+        <!-- Buttons -->
+        <Border Grid.Row="2" 
+                Padding="20,10,20,20">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
+                <ui:Button Content="Cancel"
+                           Click="CancelButton_Click"
+                           Height="36"
+                           Padding="20,0"
+                           Margin="0,0,10,0"/>
+                <ui:Button Content="Save"
+                           Click="SaveButton_Click"
+                           Appearance="Primary"
+                           Height="36"
+                           Padding="20,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</ui:FluentWindow>

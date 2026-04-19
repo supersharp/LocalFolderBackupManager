@@ -1,0 +1,123 @@
+<ui:FluentWindow x:Class="LocalFolderBackupManager.Dialogs.ScheduleEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        WindowStartupLocation="CenterOwner"
+        WindowBackdropType="Mica"
+        ExtendsContentIntoTitleBar="True"
+        ResizeMode="CanResize"
+        Width="600"
+        Height="550"
+        MinWidth="500"
+        MinHeight="450"
+        Icon="/Assets/sync.ico"
+        Title="Edit Schedule">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Bar -->
+        <ui:TitleBar Grid.Row="0"
+                     Title="Edit Schedule"
+                     ShowMaximize="False"
+                     ShowMinimize="False"
+                     Icon="/Assets/sync.ico"
+                     Height="36"/>
+
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Border Padding="24,12,24,20">
+                <StackPanel>
+
+                    <!-- Header -->
+                    <TextBlock x:Name="HeaderText"
+                               FontSize="18" FontWeight="SemiBold"
+                               Margin="0,0,0,16"/>
+
+                    <!-- Task Name (Read-only) -->
+                    <StackPanel Margin="0,0,0,12">
+                        <TextBlock Text="Task Name"
+                                   FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <ui:TextBox x:Name="TaskNameBox"
+                                    Height="38"
+                                    IsReadOnly="True"
+                                    Background="{DynamicResource ControlFillColorDisabledBrush}"/>
+                    </StackPanel>
+
+                    <!-- Description -->
+                    <StackPanel Margin="0,0,0,12">
+                        <TextBlock Text="Description (optional)"
+                                   FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <ui:TextBox x:Name="DescriptionBox"
+                                    PlaceholderText="What does this schedule do?"
+                                    Height="38"/>
+                    </StackPanel>
+
+                    <!-- Trigger Type -->
+                    <StackPanel Margin="0,0,0,12">
+                        <TextBlock Text="Trigger Type"
+                                   FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <ComboBox x:Name="TriggerTypeCombo"
+                                  Height="44"
+                                  Padding="12,8"
+                                  VerticalContentAlignment="Center"
+                                  SelectionChanged="TriggerTypeCombo_SelectionChanged"/>
+                    </StackPanel>
+
+                    <!-- Time of Day (Daily/Weekly) -->
+                    <StackPanel x:Name="TimePicker" Margin="0,0,0,12" Visibility="Collapsed">
+                        <TextBlock Text="Time of Day (HH:mm)"
+                                   FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <ui:TextBox x:Name="TimeOfDayBox"
+                                    PlaceholderText="08:00"
+                                    Height="38"/>
+                    </StackPanel>
+
+                    <!-- Day of Week (Weekly) -->
+                    <StackPanel x:Name="DayPicker" Margin="0,0,0,12" Visibility="Collapsed">
+                        <TextBlock Text="Day of Week"
+                                   FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <ComboBox x:Name="DayOfWeekCombo"
+                                  Height="38"/>
+                    </StackPanel>
+
+                    <!-- Interval (Hourly) -->
+                    <StackPanel x:Name="IntervalPicker" Margin="0,0,0,12" Visibility="Collapsed">
+                        <TextBlock Text="Repeat Every (hours)"
+                                   FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <ComboBox x:Name="IntervalCombo"
+                                  Height="38"/>
+                    </StackPanel>
+
+                    <!-- Buttons -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+                        <ui:Button Content="Cancel"
+                                   Click="CancelButton_Click"
+                                   Height="38" Padding="24,0"
+                                   Margin="0,0,12,0"/>
+                        <ui:Button Content="&#x1F4BE; Save Changes"
+                                   Click="SaveButton_Click"
+                                   Appearance="Success"
+                                   Height="38" Padding="24,0"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</ui:FluentWindow>
