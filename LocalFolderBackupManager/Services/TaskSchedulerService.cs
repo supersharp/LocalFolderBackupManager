@@ -106,14 +106,16 @@ public class TaskSchedulerService
 
     public bool IsTaskCreated()
     {
+        var fullTaskName = $"LocalFolderBackupManager_{_taskName}";
         using var ts = new TaskService();
-        return ts.GetTask(TaskPath(_taskName)) != null;
+        return ts.GetTask(fullTaskName) != null;
     }
 
     public string GetTaskStatus()
     {
+        var fullTaskName = $"LocalFolderBackupManager_{_taskName}";
         using var ts = new TaskService();
-        var task = ts.GetTask(TaskPath(_taskName));
+        var task = ts.GetTask(fullTaskName);
         return task == null ? "Not Created" : StateLabel(task.State);
     }
 
@@ -131,17 +133,16 @@ public class TaskSchedulerService
 
     public void DeleteTask()
     {
+        var fullTaskName = $"LocalFolderBackupManager_{_taskName}";
         using var ts = new TaskService();
-        var folder = GetAppFolderOrNull(ts);
-        if (folder == null) return;
-
-        try { folder.DeleteTask(_taskName); } catch { /* already gone */ }
+        try { ts.RootFolder.DeleteTask(fullTaskName); } catch { /* already gone */ }
     }
 
     public void RunTaskNow()
     {
+        var fullTaskName = $"LocalFolderBackupManager_{_taskName}";
         using var ts = new TaskService();
-        var task = ts.GetTask(TaskPath(_taskName));
+        var task = ts.GetTask(fullTaskName);
         task?.Run();
     }
 

@@ -167,7 +167,51 @@ public class DashboardViewModel : ViewModelBase
             });
         });
 
-        TaskStatus = _taskScheduler.GetTaskStatus();
+        TaskStatus = GetOverallTaskStatus();
+    }
+
+    private string GetOverallTaskStatus()
+    {
+        if (_config.ScheduledTasks == null || _config.ScheduledTasks.Count == 0)
+        {
+            return "Not Created";
+        }
+
+        int createdCount = 0;
+        int enabledCount = 0;
+        int disabledCount = 0;
+
+        foreach (var schedule in _config.ScheduledTasks)
+        {
+            if (_taskScheduler.IsScheduledTaskCreated(schedule.TaskName))
+            {
+                createdCount++;
+                var state = _taskScheduler.GetScheduledTaskState(schedule.TaskName);
+                if (state == "Ready")
+                    enabledCount++;
+                else if (state == "Disabled")
+                    disabledCount++;
+            }
+        }
+
+        if (createdCount == 0)
+        {
+            return "Not Created";
+        }
+        else if (createdCount == 1)
+        {
+            var schedule = _config.ScheduledTasks.First();
+            return _taskScheduler.GetScheduledTaskState(schedule.TaskName);
+        }
+        else
+        {
+            if (disabledCount == createdCount)
+                return $"{createdCount} Tasks (All Disabled)";
+            else if (enabledCount == createdCount)
+                return $"{createdCount} Tasks (All Ready)";
+            else
+                return $"{createdCount} Tasks ({enabledCount} Ready, {disabledCount} Disabled)";
+        }
     }
 
     private static string FormatSize(long bytes)
