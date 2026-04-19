@@ -63,7 +63,7 @@ This is a successor to the old CLI backup utlity Save_Game_Backup_Manager: https
 
 ### Installation
 
-1. **Download** the latest release from [Releases](https://github.com/supersharp/SaveGame_Folder_Backup/releases).
+1. **Download** the latest release from [Releases](https://github.com/supersharp/LocalFolderBackupManager/releases).
 2. Move the EXE to the location you'll like to keep it, since the tasks created by the app will refer to the .EXE location.
 3. **Run** `LocalFolderBackupManager`.
 
