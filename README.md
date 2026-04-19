@@ -9,6 +9,8 @@
 **Local Folder Backup Manager** is a **.NET 10 WPF application** that lets users schedule or manually trigger backups of important folders—ideal for saving game progress, documents, or any data you don't want to lose.
 This is a successor to the old CLI backup utlity Save_Game_Backup_Manager: https://github.com/supersharp/SaveGame_Folder_Backup 
 
+<img width="1100" height="700" alt="Dashboard" src="https://github.com/user-attachments/assets/b1d38d84-92f7-4383-90e1-7315ef3c2984" />
+
 ---
 
 ## Features
