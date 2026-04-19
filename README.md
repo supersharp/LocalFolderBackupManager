@@ -2,6 +2,8 @@
 
 **Helps to create a scheduled or manual backup of common Save Game Folder locations**
 
+You may use this application at your own risk. This is a personal project.
+
 ---
 
 ## Overview
