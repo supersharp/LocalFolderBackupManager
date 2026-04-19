@@ -46,6 +46,11 @@ This is a successor to the old CLI backup utlity Save_Game_Backup_Manager: https
 
 ---
 
+## Application previews:
+
+[Check the screenshots folder](https://github.com/supersharp/LocalFolderBackupManager/tree/master/Screenshots) 
+
+---
 ## Getting Started
 
 ### Prerequisites
