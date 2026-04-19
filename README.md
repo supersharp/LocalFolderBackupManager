@@ -58,14 +58,14 @@ This is a successor to the old CLI backup utlity Save_Game_Backup_Manager: https
 ### Prerequisites
 
 - Windows 10 or higher
-- [.NET 10 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) it's bundled in the EXE
+- [.NET 10 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) it's already bundled in the EXE, so seperate install is not required.
 - Requires Admin permissionns
 
 ### Installation
 
 1. **Download** the latest release from [Releases](https://github.com/supersharp/SaveGame_Folder_Backup/releases).
 2. Move the EXE to the location you'll like to keep it, since the tasks created by the app will refer to the .EXE location.
-3. **Run** `SaveGame_Folder_Backup.exe`.
+3. **Run** `LocalFolderBackupManager`.
 
 ### Usage
 
