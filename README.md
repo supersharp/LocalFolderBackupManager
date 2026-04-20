@@ -22,7 +22,6 @@ This is a successor to the old CLI backup utlity Save_Game_Backup_Manager: https
 - **Manual Backups:** Instantly back up important folders at any time.
 - **Customizable Filters:** Include/exclude specific file types or subfolders as needed.
 - **Resource Friendly:** No persistent services or tray apps—tasks wake the app only when needed.
-- **Save Game Folder Awareness:** Includes presets for common save game directories, or add your own.
 - **Secure and Reliable:** Runs only on demand via Task Scheduler triggers.
 
 ---
